@@ -2,11 +2,19 @@
   "name": "ramlocker",
   "version": "0.1.0",
   "description": "Express server that serves mocked RAML endpoints",
-  "main": "dist/index.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:SwamWithTurtles/RamLocker.git"
+  },
+  "author": {
+    "name": "David Simons",
+    "email": "david@swamwithturtles.com",
+    "url": "www.swamwithturtles.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",

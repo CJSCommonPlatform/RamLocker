@@ -1,5 +1,5 @@
-var request = require('request');
-var Q = require('q');
+const request = require('request');
+const Q = require('q');
 
 const port = 3000;
 
