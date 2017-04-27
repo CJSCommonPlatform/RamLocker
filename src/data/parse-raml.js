@@ -2,15 +2,17 @@ const raml = require('raml-parser');
 const Q = require('q');
 const fs = require('fs');
 const path = require('path');
+const URL = require('url-parse');
 
+const Log = require('log');
+const log = new Log('info');
 
 const transform = require('./transform.js').transform;
 
-function postEndpoints(resource, method) {
+function postEndpoints(relativeUrl, method) {
     return Object.keys(method.body).map(contentType => {
-
         return {
-            path: resource.relativeUri,
+            path: relativeUrl,
             method: method.method,
             contentType: contentType,
         };
@@ -18,13 +20,13 @@ function postEndpoints(resource, method) {
     });
 }
 
-function getEndpoints(resource, method) {
+function getEndpoints(relativeUrl, method) {
     const endpoints = method.responses[200].body;
 
     return Object.keys(endpoints).map(contentType => {
 
         return {
-            path: resource.relativeUri,
+            path: relativeUrl,
             method: method.method,
             contentType: contentType,
             body: (endpoints[contentType] && endpoints[contentType].example) ? endpoints[contentType].example : {}
@@ -38,26 +40,28 @@ function parseRamlFile(fileName) {
 
     raml.loadFile(fileName).then(function (data) {
 
+        const baseUri = new URL(data.baseUri);
+
         let endpointsToMock = [];
 
         data.resources.forEach(resource => {
             resource.methods.forEach(method => {
                 switch (method.method) {
                     case "get":
-                        endpointsToMock = endpointsToMock.concat(getEndpoints(resource, method));
+                        endpointsToMock = endpointsToMock.concat(getEndpoints(baseUri.pathname + resource.relativeUri, method));
                         break;
                     case "post":
-                        endpointsToMock = endpointsToMock.concat(postEndpoints(resource, method));
+                        endpointsToMock = endpointsToMock.concat(postEndpoints(baseUri.pathname + resource.relativeUri, method));
                         break;
                 }
 
             });
         });
 
-        console.log(`Successfully parsed ${fileName}`);
+        log.info(`Successfully parsed ${fileName}`);
         deferred.resolve(endpointsToMock);
     }, function (error) {
-        console.log("Error parsing " + fileName);
+        log.info("Error parsing " + fileName);
         deferred.reject('Error parsing: ' + error);
     });
 

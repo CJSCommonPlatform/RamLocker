@@ -18,7 +18,7 @@ describe("The RAML Mocking server", () => {
     });
 
     it("should respond to GET requests", (done) => {
-        serverRequester.get('/get-endpoint', 'application/json')
+        serverRequester.get('/test/get-endpoint', 'application/json')
             .then(function (body) {
                 const response = JSON.parse(body);
                 expect(response).toEqual(exampleJson);
@@ -27,7 +27,7 @@ describe("The RAML Mocking server", () => {
     });
 
     it("should respond to POST requests", (done) => {
-        serverRequester.post('/post-endpoint', 'application/json', exampleJson)
+        serverRequester.post('/test/post-endpoint', 'application/json', exampleJson)
             .then(function (response) {
                 expect(response.statusCode).toBe(202);
                 done();

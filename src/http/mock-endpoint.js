@@ -47,6 +47,8 @@ function mockPostEndpoint(app, endpointToMock) {
 }
 
 function mockEndpoint(app, endpointToMock) {
+    console.log(endpointToMock.path);
+
     switch (endpointToMock.method.toLowerCase()) {
         case "get":
             mockGetEndpoint(app, endpointToMock);
