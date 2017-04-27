@@ -1,0 +1,12 @@
+#%RAML 0.8
+title: Test Query API
+baseUri: http://localhost:3000
+protocols: [ HTTP, HTTPS ]
+
+/get-endpoint:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/example.json
