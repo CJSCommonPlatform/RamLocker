@@ -6,15 +6,19 @@ Construct a mock Express HTTP server based on a spec set out in RAML v0.8 files.
 
 ### How to use on your project
 
-Currently we have not set the project up with any library repository. 
+To install ramlocker on your project, we recommend using NPM
 
-If you check out the project into your codebase, you can depend directly on the app.js file
+`npm install --save-dev ramlocker`
 
-This is sufficient to start up your mock server
+You can then require the file into your file using your package manager of choice and start the server using the function this returns. On large projects, it can take a while to parse the RAML and construct the endpoints so this is an asynchronous process, that exposes a promise you can use to capture the server if, say, you want to shut it down.  
+
 ```javascript 
-const ramLocker = require('$PATH_TO_DIST/app.js');
+let app;
+const ramLocker = require('ramlocker');
 
-ramLocker($PORT, $PATH_TO_RAML);
+ramLocker($PORT, $PATH_TO_RAML).then(server => {
+    app = server;
+});
 ```
 
 ### How to develop on this project
@@ -27,7 +31,7 @@ We currently have some smoke tests to ensure we don't break the fundamental HTTP
 
 `gulp test`
 
-We'll use a fairly standard pull request model
+We'll use a fairly standard pull request model if you want to submit back to the project
 
 ## API
 
@@ -52,7 +56,6 @@ It returns a promise that will resovle to an `http.Server` object.
 ### Technically
 
 * More granular e2e tests + unit tests
-* Upload to NPM repo to allow users to 
 * Linter
 * Run tests on check-in
 * Move RAML parsing to a stream-based API to prevent passing all routes across in one promise
