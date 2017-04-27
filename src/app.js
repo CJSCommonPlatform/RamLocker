@@ -20,6 +20,12 @@ function addEndpoints(directory) {
 function setUpExpress(port, directory) {
     return addEndpoints(directory)
         .then(() => {
+            app.use(function(req, res, next) {
+                res.header("Access-Control-Allow-Origin", "*");
+                res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                next();
+            });
+
             return app.listen(port, function () {
                 log.info(new Array(37).join('='));
                 log.info(`READY! Server listening on port ${port}`);
