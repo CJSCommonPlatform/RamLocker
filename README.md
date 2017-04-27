@@ -17,7 +17,7 @@ const ramLocker = require('$PATH_TO_DIST/app.js');
 ramLocker($PORT, $PATH_TO_RAML);
 ```
 
-###How to develop on this project
+### How to develop on this project
 
 Check out the code. The first time you do this you will need to install the dependencies
 
@@ -29,7 +29,7 @@ We currently have some smoke tests to ensure we don't break the fundamental HTTP
 
 We'll use a fairly standard pull request model
 
-##API
+## API
 
 ### ramlocker(port, pathToRaml) : Promise(Server)
 
@@ -37,7 +37,7 @@ The global export is a function that takes a port to run the server on, and a pa
 
 It returns a promise that will resovle to an `http.Server` object.
 
-##TODOs
+## TODOs
 
 ### Functionality
 
