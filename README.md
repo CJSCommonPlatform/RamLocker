@@ -1,6 +1,6 @@
 # RAMLocker
 
-Construct a mock Express HTTP server based on a spec set out in RAML v0.8 chfiles.
+Construct a mock Express HTTP server based on a spec set out in RAML v0.8 files.
 
 ## Quickstart
 
@@ -12,7 +12,7 @@ If you check out the project into your codebase, you can depend directly on the 
 
 This is sufficient to start up your mock server
 ```javascript 
-const ramLocker = require('$PATH_TO_DIST/app.js)`;
+const ramLocker = require('$PATH_TO_DIST/app.js');
 
 ramLocker($PORT, $PATH_TO_RAML);
 ```
