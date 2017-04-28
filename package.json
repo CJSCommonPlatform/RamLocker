@@ -1,6 +1,6 @@
 {
   "name": "ramlocker",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Express server that serves mocked RAML endpoints",
   "main": "dist/app.js",
   "scripts": {
